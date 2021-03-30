@@ -1,14 +1,14 @@
-const core = require('@actions/core');
+let core = require('@actions/core');
 const github = require('@actions/github');
 
 function run() {
   // const pattern = core.getInput('pattern')
   // const regex = new RegExp(pattern);
-  const title =
-    github.context.payload &&
-    github.context.payload.pull_request &&
-    github.context.payload.pull_request.title
-  core.info(title)
+  // const title =
+  //   github.context.payload &&
+  //   github.context.payload.pull_request &&
+  //   github.context.payload.pull_request.title
+  // core.info(title)
   // const isValid = regex.test(title)
   // if (!isValid) {
   //   core.setFailed(
@@ -18,6 +18,8 @@ function run() {
 
   console.log('PULL REQUEST:');
   console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
+  console.log('TITLE:');
+  console.log(github.context.payload.pull_request.title);
   if (github && github.context && github.context.payload && github.context.payload.pull_request && github.context.payload.pull_request.title) {
     core.setOutput('title', github.context.payload.pull_request.title);
   }
