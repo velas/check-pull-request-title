@@ -16,8 +16,8 @@ function run() {
   //   )
   // }
 
-  console.log('PULL REQUEST:');
-  console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
+  // console.log('PULL REQUEST:');
+  // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
   console.log('TITLE:');
   console.log(github.context.payload.pull_request.title);
   console.log('URL:');
