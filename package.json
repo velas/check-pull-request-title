@@ -5,12 +5,10 @@
   "author": "Dylan Vann <dylan@dylanvann.com> (https://dylanvann.com)",
   "files": [
     "action.yml",
-    "dist/index.js"
+    "index.js"
   ],
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "index.js",
   "scripts": {
-    "build": "ncc build src/index.ts --minify --v8-cache",
     "lint": "tsdx lint",
     "test": "tsdx test"
   },
