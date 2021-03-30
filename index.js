@@ -24,7 +24,7 @@ function run() {
   console.log(github.context.payload.pull_request.html_url);
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', github.context.payload.pull_request.title);
-    core.setOutput('title', github.context.payload.pull_request.url);
+    core.setOutput('url', github.context.payload.pull_request.url);
   }
 }
 
