@@ -16,13 +16,15 @@ function run() {
   //   )
   // }
 
-  console.log('PULL REQUEST:');
-  console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
+  // console.log('PULL REQUEST:');
+  // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
   console.log('TITLE:');
   console.log(github.context.payload.pull_request.title);
+  console.log('URL:');
   console.log(github.context.payload.pull_request.html_url);
-  if (github && github.context && github.context.payload && github.context.payload.pull_request && github.context.payload.pull_request.title) {
+  if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', github.context.payload.pull_request.title);
+    core.setOutput('title', github.context.payload.pull_request.url);
   }
 }
 

@@ -7,6 +7,8 @@ description: Check that pull request titles contain a Jira issue.
 outputs:
   title:
     description: "PR title"
+  url:
+    description: "PR url"
 runs:
   using: node12
   main: index.js
