@@ -1,8 +1,7 @@
 {
   "name": "check-pull-request-title",
-  "version": "0.1.14",
+  "version": "1.0.0",
   "license": "MIT",
-  "author": "Dylan Vann <dylan@dylanvann.com> (https://dylanvann.com)",
   "files": [
     "action.yml",
     "index.js"
@@ -12,14 +11,8 @@
     "lint": "tsdx lint",
     "test": "tsdx test"
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
   "dependencies": {
-    "@actions/core": "^1.2.0",
-    "@actions/github": "^1.1.0"
+    "@actions/core": "^1.0.0",
+    "@actions/github": "^1.0.0"
   }
 }
