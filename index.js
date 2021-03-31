@@ -11,12 +11,12 @@ function run() {
   const ticketIDPattern = 'vtx-\\d+';
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
-  
+
   const ticketTypePattern = 'bugfix|feature';
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   
-  const testsPattern = 'tests';
+  const testsPattern = '\[tests\]';
   const rexexTests = new RegExp(testsPattern, 'gim');
   const isTests = !!title.match(rexexTests);
 
