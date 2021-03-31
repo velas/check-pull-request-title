@@ -17,7 +17,6 @@ function run() {
   core.info(`Ticket id match: ${ticketIDMatch}`);
   core.info(`Ticket type match: ${ticketTypeMatch}`);
 
-  core.info(`Is valid: ${isValid}`);
   if (title.includes('no-title-check')) return;
 
   if (ticketIDMatch) {
