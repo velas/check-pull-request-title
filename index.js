@@ -14,18 +14,19 @@ function run() {
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
   const ticketTypeMatch = title.match(regexTicketType);
+  core.info(typeof ticketTypeMatch);
   core.info(`Ticket id match: ${ticketIDMatch}`);
   core.info(`Ticket type match: ${ticketTypeMatch}`);
 
   if (title.includes('no-title-check')) return;
 
-  if (ticketIDMatch) {
+  if (!!ticketIDMatch) {
     core.setFailed(
       `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13). Please add it to title`,
     )
   }
 
-  if (ticketTypeMatch) {
+  if (!!ticketTypeMatch) {
     core.setFailed(
       `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
     )
