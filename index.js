@@ -9,11 +9,16 @@ function run() {
 
   if (!title) throw new Error(`No title passed`);
   const ticketIDPattern = 'vtx-\\d+';
-  const ticketTypePattern = 'bugfix|feature';
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
-  const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
+  
+  const ticketTypePattern = 'bugfix|feature';
+  const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
+  
+  const testsPattern = 'tests';
+  const rexexTests = new RegExp(testsPattern, 'gim');
+  const isTests = !!title.match(rexexTests);
 
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
@@ -35,6 +40,7 @@ function run() {
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', title);
     core.setOutput('url', prURL);
+    core.setOutput('istests', isTests);
   }
 }
 
