@@ -12,7 +12,7 @@ function run() {
   core.info(`Title: ${title}`);
   const matches = title.match(regex);
   core.info(`Matches: ${matches}`);
-  const isValid = !!matches.length;
+  const isValid = !!matches;
 
   core.info(`Is valid: ${isValid}`);
   if (!isValid) {
