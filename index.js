@@ -5,7 +5,7 @@ function run() {
   const title = github.context.payload.pull_request.title;
   core.info(`PR title: ${title}`);
   const prURL = github.context.payload.pull_request._links.html.href;
-  console.log(`PR url: ${prURL}`);
+  core.info(`PR url: ${prURL}`);
 
   if (!title) throw new Error(`No title passed`);
   const ticketIDPattern = 'vtx-\\d+';
@@ -15,21 +15,18 @@ function run() {
   const ticketIDMatch = title.match(regexTicketID);
   const ticketTypeMatch = title.match(regexTicketType);
 
-  console.warn(typeof ticketIDMatch);
-  console.warn(typeof ticketTypeMatch);
-
-  if (title.includes('no-title-check')) return;
-
-  if (!ticketIDMatch) {
-    core.setFailed(
-      `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13). Please add it to title`,
+  if (!title.includes('no-title-check')) {
+    if (!ticketIDMatch) {
+      core.setFailed(
+        `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13). Please add it to title`,
+        )
+      }
+      
+      if (!ticketTypeMatch) {
+      core.setFailed(
+        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
       )
     }
-    
-    if (!ticketTypeMatch) {
-    core.setFailed(
-      `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
-    )
   }
 
   // console.log('PULL REQUEST:');
