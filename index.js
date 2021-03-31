@@ -37,6 +37,8 @@ function run() {
   // console.log('PULL REQUEST:');
   // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
   
+  core.info(`issests: ${isTests}`);
+
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', title);
     core.setOutput('url', prURL);
