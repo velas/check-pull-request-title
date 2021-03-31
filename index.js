@@ -4,7 +4,7 @@ const github = require('@actions/github');
 function run() {
   const title = github.context.payload.pull_request.title;
   core.info(`PR title: ${title}`);
-  const prURL = github.context.payload.pull_request._links.html;
+  const prURL = github.context.payload.pull_request._links.html.href;
   console.log(`PR url: ${prURL}`);
 
   if (!title) throw new Error(`No title passed`);
