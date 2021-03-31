@@ -3,29 +3,38 @@ const github = require('@actions/github');
 
 function run() {
   const title = github.context.payload.pull_request.title;
+  core.info(`PR title: ${title}`);
   const prURL = github.context.payload.pull_request._links.html;
+  console.log(`PR url: ${prURL}`);
 
-  if (!title) throw new Error(`Not title provided`);
-  // const title = 'VTX-100, vtx-111 some text () bla bla []';
-  const pattern = 'vtx-\\d+';
-  const regex = new RegExp(pattern, 'gim');
-  core.info(`Title: ${title}`);
-  const matches = title.match(regex);
-  core.info(`Matches: ${matches}`);
-  const isValid = !!matches;
+  if (!title) throw new Error(`No title passed`);
+  const ticketIDPattern = 'vtx-\\d+';
+  const ticketTypePattern = 'bugfix|feature';
+  const regexTicketID = new RegExp(ticketIDPattern, 'gim');
+  const regexTicketType = new RegExp(ticketTypePattern, 'gim');
+  const ticketIDMatch = title.match(regexTicketID);
+  const ticketTypeMatch = title.match(regexTicketType);
+  core.info(`Ticket id match: ${ticketIDMatch}`);
+  core.info(`Ticket type match: ${ticketTypeMatch}`);
 
   core.info(`Is valid: ${isValid}`);
-  if (!isValid) {
+  if (title.includes('no-title-check')) return;
+
+  if (ticketIDMatch) {
     core.setFailed(
-      `Pull request title "${title}" does not match regex pattern "${pattern}".`,
+      `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13). Please add it to title`,
+    )
+  }
+
+  if (ticketTypeMatch) {
+    core.setFailed(
+      `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
     )
   }
 
   // console.log('PULL REQUEST:');
   // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
   
-  console.log(`Title: ${title}`);
-  console.log(`URL: ${prURL}`);
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', title);
     core.setOutput('url', prURL);
