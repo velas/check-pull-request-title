@@ -16,9 +16,7 @@ function run() {
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   
-  const testsPattern = '\[tests\]';
-  const rexexTests = new RegExp(testsPattern, 'gim');
-  const isTests = !!title.match(rexexTests);
+  const isTests = title.includes('[tests]');
 
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
