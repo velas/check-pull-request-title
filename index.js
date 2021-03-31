@@ -25,7 +25,7 @@ function run() {
         )
       }
       
-      if (!ticketTypeMatch) {
+      if (!ticketTypeMatch && !isTests) {
       core.setFailed(
         `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
       )
