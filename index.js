@@ -16,7 +16,7 @@ function run() {
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   
-  const isTests = title.includes('[tests]');
+  const isTests = title.toLowerCase().includes('[tests]');
 
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
