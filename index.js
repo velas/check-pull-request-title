@@ -8,17 +8,18 @@ function run() {
   core.info(`PR url: ${prURL}`);
 
   if (!title) throw new Error(`No title passed`);
+  core.info(`Title: ${title}`);
   const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
-  core.info('ticketIDPattern: ', ticketIDPattern);
+  core.info('ticketIDPattern:', ticketIDPattern);
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
-  core.info('ticketIDMatch: ', ticketIDMatch);
+  core.info(`ticketIDMatch: ${ticketIDMatch}`);
   
   
   const ticketTypePattern = 'bugfix|feature|tests';
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
-  core.info('ticketTypeMatch: ', ticketTypeMatch);
+  core.info('ticketTypeMatch:', ticketTypeMatch);
   
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
