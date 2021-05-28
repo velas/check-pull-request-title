@@ -9,6 +9,7 @@ function run() {
 
   if (!title) throw new Error(`No title passed`);
   const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
+  core.info('ticketIDPattern: ', ticketIDPattern);
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
   core.info('ticketIDMatch: ', ticketIDMatch);
