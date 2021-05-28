@@ -11,7 +11,7 @@ function run() {
   core.info(`Title: ${title}`);
   const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
   core.info(`ticketIDPattern: ${ticketIDPattern}`);
-  const regexTicketID = new RegExp('vtx-\\d+', 'gim');
+  const regexTicketID = new RegExp(`${ticketIDPattern}`, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
   core.info(`ticketIDMatch: ${ticketIDMatch}`);
 
