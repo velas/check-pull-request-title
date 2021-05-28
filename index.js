@@ -11,11 +11,13 @@ function run() {
   const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
-
-
+  core.info('ticketIDMatch: ', ticketIDMatch);
+  
+  
   const ticketTypePattern = 'bugfix|feature|tests';
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
+  core.info('ticketTypeMatch: ', ticketTypeMatch);
   
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
