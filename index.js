@@ -12,35 +12,29 @@ function run() {
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
 
-  const ticketTypePattern = 'bugfix|feature';
+  const ticketTypePattern = 'bugfix|feature|test';
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   
-  const isTests = title.toLowerCase().includes('[tests]');
-
   if (!title.includes('no-title-check')) {
     if (!ticketIDMatch) {
       core.setFailed(
-        `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13). Please add it to title`,
+        `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13).`,
         )
       }
       
-      if (!ticketTypeMatch && !isTests) {
+      if (!ticketTypeMatch) {
       core.setFailed(
-        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix"`,
+        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix" (or "test")`,
       )
     }
   }
 
-  // console.log('PULL REQUEST:');
   // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
   
-  core.info(`issests: ${isTests}`);
-
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', title);
     core.setOutput('url', prURL);
-    core.setOutput('istests', isTests);
   }
 }
 
