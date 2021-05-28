@@ -36,6 +36,8 @@ function run() {
   if (github && github.context && github.context.payload && github.context.payload.pull_request) {
     core.setOutput('title', title);
     core.setOutput('url', prURL);
+    core.info(`PR title: ${title}`);
+    core.info(`PR URL: ${prURL}`);
   }
 }
 
