@@ -8,11 +8,12 @@ function run() {
   core.info(`PR url: ${prURL}`);
 
   if (!title) throw new Error(`No title passed`);
-  const ticketIDPattern = 'vtx-\\d+';
+  const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
 
-  const ticketTypePattern = 'bugfix|feature|test';
+
+  const ticketTypePattern = 'bugfix|feature|tests';
   const regexTicketType = new RegExp(ticketTypePattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   
@@ -25,7 +26,7 @@ function run() {
       
       if (!ticketTypeMatch) {
       core.setFailed(
-        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix" (or "test")`,
+        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix" (or "tests")`,
       )
     }
   }

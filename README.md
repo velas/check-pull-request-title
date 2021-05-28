@@ -1,37 +1,18 @@
-# Check Pull Request Title
+# Idea
+Allows to get pull request title and url (appropriate values are available as job outputs: `title`, `url`) on GitHub Actions.
+Also performs a check if PR title contains the keywords ("feature", "bugfix" or "tests").
 
-![Version](https://img.shields.io/github/v/release/dylanvann/check-pull-request-title?style=flat-square)
+## Inputs and outputs
+Required input: `ticket_pattern`.
+Outputs: `title`, `url`.
 
-A GitHub action that checks that a PR title matches a regex patter.
-
-Could be used for:
-
-- Enforcing any commit convention.
-- Enforcing including a Jira ticket reference in the title.
-- Enforcing using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
-
-This is intended to be used with the [Autosquash](https://github.com/tibdex/autosquash) action so that squashed commit messages follow a convention.
-
-# Example Workflow
+## Example Workflow
 
 ```yml
-name: 'Jira Check'
-on:
-  pull_request:
-    types:
-      # Check title when opened.
-      - opened
-      # Check title when new commits are pushed.
-      # Required to use as a status check.
-      - synchronize
+- name: check and return PR data
+  id: pr-data
+  uses: velas/check-pull-request-title@master
+  with:
+    ticket_pattern: 'vtx-\\d+'
 
-jobs:
-  publish:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: dylanvann/check-pull-request-title@v1
-        with:
-          # Match pull request titles in the form UI-1234 - Message.
-          pattern: '^UI-\d* - '
 ```
