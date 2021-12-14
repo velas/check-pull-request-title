@@ -17,6 +17,7 @@ Outputs: `title`, `url`.
   uses: velas/check-pull-request-title@master
   with:
     ticket_pattern: 'vtx-\\d+'
+    ticket_types_pattern: 'feature|bugfix|tests'
 
 ```
 
