@@ -1,6 +1,6 @@
 {
   "name": "check-pull-request-title",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "main": "index.js",
   "scripts": {

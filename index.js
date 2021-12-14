@@ -1,47 +1,38 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-function run() {
+(function run() {
   const title = github.context.payload.pull_request.title;
   core.info(`PR title: ${title}`);
-  const prURL = github.context.payload.pull_request._links.html.href;
-  core.info(`PR url: ${prURL}`);
 
-  if (!title) throw new Error(`No title passed`);
+  if (!title) throw new Error(`Pull request title is empty`);
+
   core.info(`Title: ${title}`);
   const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
-  core.info(`ticketIDPattern: ${ticketIDPattern}`);
+  const ticketTypesPattern = core.getInput('ticket_types_pattern');
+
+  core.info('ticketIDPattern:', ticketIDPattern);
+  core.info('ticketTypesPattern:', ticketTypesPattern);
+
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
   core.info(`ticketIDMatch: ${ticketIDMatch}`);
 
-  const ticketTypePattern = 'bugfix|feature|tests';
-  const regexTicketType = new RegExp(ticketTypePattern, 'gim');
+  const regexTicketType = new RegExp(ticketTypesPattern, 'gim');
   const ticketTypeMatch = title.match(regexTicketType);
   core.info(`ticketTypeMatch: ${ticketTypeMatch}`);
   
-  if (!title.includes('no-title-check')) {
+  if (!title.includes('@no-title-check')) {
     if (!ticketIDMatch) {
       core.setFailed(
-        `Pull request title "${title}" does not contain Jira ticker ID (e.g. VTX-13).`,
+        `Pull request title "${title}" does not contain Jira ticker ID for provided pattern: ${ticketIDPattern}`,
         )
       }
       
       if (!ticketTypeMatch) {
       core.setFailed(
-        `Pull request title "${title}" does not contain ticket type "feature" or "bugfix" (or "tests")`,
+        `Pull request title "${title}" does not contain any of ticket types: ${ticketTypesPattern}`,
       )
     }
   }
-
-  // console.log(JSON.stringify(github.context.payload.pull_request, null, 2));
-  
-  if (github && github.context && github.context.payload && github.context.payload.pull_request) {
-    core.setOutput('title', title);
-    core.setOutput('url', prURL);
-    core.info(`PR title: ${title}`);
-    core.info(`PR URL: ${prURL}`);
-  }
-}
-
-run();
+})();
