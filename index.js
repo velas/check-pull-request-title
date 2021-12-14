@@ -11,8 +11,8 @@ const github = require('@actions/github');
   const ticketIDPattern = core.getInput('ticket_id_pattern'); //'vtx-\\d+';
   const ticketTypesPattern = core.getInput('ticket_types_pattern');
 
-  core.info('ticketIDPattern:', String(ticketIDPattern));
-  core.info('ticketTypesPattern:', String(ticketTypesPattern));
+  console.info('ticketIDPattern:', String(ticketIDPattern));
+  console.info('ticketTypesPattern:', String(ticketTypesPattern));
 
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
