@@ -8,7 +8,7 @@ const github = require('@actions/github');
   if (!title) throw new Error(`Pull request title is empty`);
 
   core.info(`Title: ${title}`);
-  const ticketIDPattern = core.getInput('ticket_pattern'); //'vtx-\\d+';
+  const ticketIDPattern = core.getInput('ticket_id_pattern'); //'vtx-\\d+';
   const ticketTypesPattern = core.getInput('ticket_types_pattern');
 
   core.info('ticketIDPattern:', ticketIDPattern);

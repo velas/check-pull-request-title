@@ -4,7 +4,7 @@ Also performs a check if PR title contains the keywords (e.g. "feature", "bugfix
 
 ## Inputs and outputs
 Required inputs:
-`ticket_pattern`. String. E.g.: `'vtx-\d+'`
+`ticket_id_pattern`. String. E.g.: `'vtx-\d+'`
 `ticket_types_pattern`. Separated by `|`. E.g.: `feature|bugfix`.
 
 Outputs: `title`, `url`.
