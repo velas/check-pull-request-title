@@ -28,7 +28,7 @@ const github = require('@actions/github');
         `Pull request title "${title}" does not contain Jira ticker ID for provided pattern: ${ticketIDPattern}`,
         )
       }
-      
+
       if (!ticketTypeMatch) {
       core.setFailed(
         `Pull request title "${title}" does not contain any of ticket types: ${ticketTypesPattern}`,
