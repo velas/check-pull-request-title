@@ -1,10 +1,10 @@
 name: Jira Check
 description: Check that pull request titles contain a Jira issue.
 inputs:
-  ticket_pattern:
+  ticket_id_pattern:
     description: 'Ticket ID pattern to match, e.g. "vtx-\\d+"'
     required: true
-  ticket_id_pattern:
+  ticket_types_pattern:
     description: 'Ticket type pattern to match, separated by "|", e.g.: "feature|bugfix"'
     required: true
 runs:
