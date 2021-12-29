@@ -12,15 +12,18 @@ const github = require('@actions/github');
   const ticketTypesPattern = core.getInput('ticket_types_pattern');
 
   core.info(`ticketIDPattern: ${ticketIDPattern}`);
-  core.info(`ticketTypesPattern: ${ticketTypesPattern}`);
+  core.info(`ticketTypesPattern: ${ticketTypesPattern || 'NOT SET'}`);
 
   const regexTicketID = new RegExp(ticketIDPattern, 'gim');
   const ticketIDMatch = title.match(regexTicketID);
   core.info(`ticketIDMatch: ${ticketIDMatch}`);
 
-  const regexTicketType = new RegExp(ticketTypesPattern, 'gim');
-  const ticketTypeMatch = title.match(regexTicketType);
-  core.info(`ticketTypeMatch: ${ticketTypeMatch}`);
+  let ticketTypeMatch;
+  if (ticketTypesPattern) {
+    const regexTicketType = new RegExp(ticketTypesPattern, 'gim');
+    ticketTypeMatch = title.match(regexTicketType);
+    core.info(`ticketTypeMatch: ${ticketTypeMatch}`);
+  }
   
   if (!title.includes('@no-title-check')) {
     if (!ticketIDMatch) {
@@ -29,7 +32,7 @@ const github = require('@actions/github');
         )
       }
 
-      if (!ticketTypeMatch) {
+      if (ticketTypesPattern && !ticketTypeMatch) {
       core.setFailed(
         `Pull request title "${title}" does not contain any of ticket types: ${ticketTypesPattern}`,
       )

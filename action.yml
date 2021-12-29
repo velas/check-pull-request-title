@@ -6,7 +6,7 @@ inputs:
     required: true
   ticket_types_pattern:
     description: 'Ticket type pattern to match, separated by "|", e.g.: "feature|bugfix"'
-    required: true
+    required: false
 runs:
   using: node12
   main: index.js
